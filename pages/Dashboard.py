@@ -4,7 +4,7 @@ import plotly.express as px
 import numpy as np
 
 
-df = pd.read_csv("pages\cleaned_finance.csv")
+df = pd.read_csv("pages/cleaned_finance.csv")
 
 
 st.set_page_config(page_title="Dashboard", page_icon=":bar_chart:", layout="wide")
