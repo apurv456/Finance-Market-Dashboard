@@ -1,4 +1,4 @@
-Date,Headline,Source,Market Event,Market Index,Index Change Percent,Trading Volume,Sentiment,Sector,Impact Level,Related Company
+date,headline,source,market_event,market_index,index_change_percent,trading_volume,sentiment,sector,impact_level,related_company
 2025-05-21,Nikkei 225 index benefits from a weaker yen,Times of India,Commodity Price Shock,DAX,3.52,166.45,Negative,Technology,High,Goldman Sachs
 2025-05-18,Government subsidy program gives a lift to the agriculture sector,Financial Times,Central Bank Meeting,Shanghai Composite,-3.39,57.61,Negative,Retail,Low,ExxonMobil
 2025-06-25,New housing data release shows a slowdown in market activity,The Hindu Business Line,Consumer Confidence Report,Shanghai Composite,-0.05,403.22,Neutral,Retail,Medium,Boeing
