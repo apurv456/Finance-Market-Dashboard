@@ -15,27 +15,27 @@ st.title("Global Finance Market Dashboard")
 # sidebar filter
 st.sidebar.header("Filters")
 
-sector = st.sidebar.multiselect("Select Sector",options=df["Sector"].unique(),
-                                default=df["Sector"].unique())
+sector = st.sidebar.multiselect("Select Sector",options=df["sector"].unique(),
+                                default=df["sector"].unique())
 
-market_event = st.sidebar.multiselect("Select Market Event",options=df["Market Event"].unique(),
-                                      default=df["Market Event"].unique())
+market_event = st.sidebar.multiselect("Select Market Event",options=df["market_event"].unique(),
+                                      default=df["market_event"].unique())
 
-index_range = st.sidebar.slider("Index Change Percent Range",float(df["Index Change Percent"].min()),
-                                float(df["Index Change Percent"].max()),
-                                (float(df["Index Change Percent"].min()),float(df["Index Change Percent"].max())))
+index_range = st.sidebar.slider("Index Change Percent Range",float(df["index_change_percent"].min()),
+                                float(df["index_change_percent"].max()),
+                                (float(df["index_change_percent"].min()),float(df["index_change_percent"].max())))
 
 # applying filters
-filtered_df = df[(df["Sector"].isin(sector)) & (df["Market Event"].isin(market_event)) &
-                 (df["Index Change Percent"] >= index_range[0]) & (df["Index Change Percent"] <= index_range[1])]
+filtered_df = df[(df["sector"].isin(sector)) & (df["market_event"].isin(market_event)) &
+                 (df["index_change_percent"] >= index_range[0]) & (df["index_change_percent"] <= index_range[1])]
 
 
 # KPIs
 col1, col2, col3 = st.columns(3)
 
 col1.metric("Total News", len(filtered_df))
-col2.metric("Avg Index Change %", round(filtered_df["Index Change Percent"].mean(), 2))
-col3.metric("Total Trading Volume", round(filtered_df["Trading Volume"].sum(), 2))
+col2.metric("Avg Index Change %", round(filtered_df["index_change_percent"].mean(), 2))
+col3.metric("Total Trading Volume", round(filtered_df["trading_volume"].sum(), 2))
 
 st.divider()
 
@@ -44,7 +44,7 @@ st.dataframe(filtered_df)
 
 # Index Change % by Market Index
 st.header("Index Change % by Market Index")
-fig = px.bar(filtered_df, x="Market Index", y="Index Change Percent", color="Market Index")
+fig = px.bar(filtered_df, x="market_index", y="index_change_percent", color="market_index")
 st.plotly_chart(fig)
 st.info("""Insight: This chart compares performance across market indices.
 - Highlights which index gained or lost the most.
@@ -54,7 +54,7 @@ st.info("""Insight: This chart compares performance across market indices.
 
 # Market Index Change Trend Over Time
 st.header("Index Change Trend Over Time")
-fig = px.line(filtered_df, x="Date", y="Index Change Percent", color="Market Index", markers=True)
+fig = px.line(filtered_df, x="date", y="index_change_percent", color="market_index", markers=True)
 st.plotly_chart(fig)
 st.info("""Insight: Shows how each market index moves over time.
 - Identifies trends, volatility, and market cycles.
@@ -63,7 +63,7 @@ st.info("""Insight: Shows how each market index moves over time.
 
 # Trading Volume by Sector
 st.header("Trading Volume by Sector")
-fig = px.bar(filtered_df, x="Sector", y="Trading Volume")
+fig = px.bar(filtered_df, x="sector", y="trading_volume")
 st.plotly_chart(fig)
 st.info("""Insight: Displays sector-wise trading activity.
 - High volume → strong interest or major news impact.
@@ -71,8 +71,8 @@ st.info("""Insight: Displays sector-wise trading activity.
 
 # Volume vs Index Change
 st.header("Volume vs Index Change")
-fig = px.scatter(filtered_df, x="Trading Volume", y="Index Change Percent", 
-                 color="Sentiment", size="Trading Volume", hover_name="Headline")
+fig = px.scatter(filtered_df, x="trading_volume", y="index_change_percent", 
+                 color="sentiment", size="trading_volume", hover_name="headline")
 st.plotly_chart(fig)
 st.info("""Insight: Analyzes the relationship between price movement and trading volume.
 - High volume + high index change → strong market conviction
@@ -81,7 +81,7 @@ st.info("""Insight: Analyzes the relationship between price movement and trading
 
 # Market Sentiment Distribution
 st.header("Market Sentiment Distribution")
-fig = px.pie(filtered_df, names="Sentiment")
+fig = px.pie(filtered_df, names="sentiment")
 st.plotly_chart(fig)
 st.info("""Insight: Shows overall market mood (Positive / Neutral / Negative).
 - Dominant sentiment reflects investor confidence.
@@ -90,7 +90,7 @@ st.info("""Insight: Shows overall market mood (Positive / Neutral / Negative).
 
 # Trading Volume Distribution by Sector
 st.header("Trading Volume Distribution by Sector")
-fig = px.box(filtered_df, x="Sector", y="Trading Volume")
+fig = px.box(filtered_df, x="sector", y="trading_volume")
 st.plotly_chart(fig)
 st.info("""Insight: Shows spread, median, and outliers in sector trading volumes.
 - Identifies highly volatile sectors.
@@ -99,7 +99,7 @@ st.info("""Insight: Shows spread, median, and outliers in sector trading volumes
 
 # Distribution of Index Change Percent
 st.header("Distribution of Index Change Percent")
-fig = px.histogram(filtered_df, x="Index Change Percent", nbins=10)
+fig = px.histogram(filtered_df, x="index_change_percent", nbins=10)
 st.plotly_chart(fig)
 st.info("""Insight: Shows how index changes are distributed.
 - Identifies whether most changes are small or extreme.
@@ -108,7 +108,7 @@ st.info("""Insight: Shows how index changes are distributed.
 
 # Market Events Impact Across Sectors
 st.header("Market Events Impact Across Sectors")
-fig = px.density_heatmap(filtered_df, x="Market Event", y="Sector")
+fig = px.density_heatmap(filtered_df, x="market_event", y="sector")
 st.plotly_chart(fig)
 st.info("""Insight: Highlights how different market events affect sectors.
 - Darker cells = stronger impact.
@@ -116,7 +116,7 @@ st.info("""Insight: Highlights how different market events affect sectors.
 
 # Impact Level by Company
 st.header("Impact Level by Company")
-fig = px.treemap(filtered_df, path=["Impact Level", "Related Company"], values="Trading Volume")
+fig = px.treemap(filtered_df, path=["impact_level", "related_company"], values="trading_volume")
 st.plotly_chart(fig)
 st.info("""Insight: Shows which companies are most affected by events.
 - Larger blocks → higher trading volume impact.
@@ -125,7 +125,7 @@ st.info("""Insight: Shows which companies are most affected by events.
 
 # News Source to Sentiment Flow
 st.header("News Source to Sentiment Flow")
-fig = px.sunburst(filtered_df, path=["Source", "Market Event", "Sentiment"])
+fig = px.sunburst(filtered_df, path=["source", "market_event", "sentiment"])
 st.plotly_chart(fig)
 st.info("""Insight: Tracks how news sources influence market sentiment.
 - Shows which sources generate positive or negative sentiment.
@@ -134,7 +134,7 @@ st.info("""Insight: Tracks how news sources influence market sentiment.
 
 # Trading Volume Trend by Sector Over Time
 st.header("Trading Volume Trend by Sector Over Time")
-fig = px.area(filtered_df, x="Date", y="Trading Volume", color="Sector")
+fig = px.area(filtered_df, x="date", y="trading_volume", color="sector")
 st.plotly_chart(fig)
 st.info("""Insight: Shows how sector participation changes over time.
 - Rising area → increasing investor interest.
@@ -143,8 +143,8 @@ st.info("""Insight: Shows how sector participation changes over time.
 
 # Index Change Percent vs Trading Volume by Market Index
 st.header("Index Change Percent vs Trading Volume by Market Index")
-fig = px.scatter(filtered_df, x="Index Change Percent", y="Trading Volume", 
-                 size="Trading Volume", color="Market Index")
+fig = px.scatter(filtered_df, x="index_change_percent", y="trading_volume", 
+                 size="trading_volume", color="market_index")
 st.plotly_chart(fig)
 st.info("""Insight: Compares performance vs liquidity across indices.
 - High change + high volume → strong market confidence
