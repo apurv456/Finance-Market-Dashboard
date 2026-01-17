@@ -14,17 +14,17 @@ st.markdown("<p style= 'text-align:center'>This dataset contains 3,024 records o
 
 st.subheader("Dataset Overview")
 st.markdown("""<table><tr><th>Column</th><th>Description</th></tr>
-            <tr><td><b>Date</b></td><td>Date when the market news was reported</td></tr>
-            <tr><td><b>Headline</b></td><td>News headline describing the event</td></tr>
-            <tr><td><b>Source</b></td><td>News source (e.g., Bloomberg, Reuters)</td></tr>
-            <tr><td><b>Market Event</b></td><td>Type of event (Interest Rate Change, Earnings, Policy Update, etc.)</td></tr>
-            <tr><td><b>Market Index</b></td><td>Affected market index (e.g., NIFTY, SENSEX, NASDAQ)</td></tr>
-            <tr><td><b>Index Change Percent</b></td><td>Percentage change in the index due to the event</td></tr>
-            <tr><td><b>Trading Volume</b></td><td>Trading volume recorded after the news</td></tr>
-            <tr><td><b>Sentiment</b></td><td>Market sentiment derived from the news (Positive, Negative, Neutral)</td></tr>
-            <tr><td><b>Sector</b></td><td>Industry sector impacted (IT, Banking, Retail, etc.)</td></tr>
-            <tr><td><b>Impact Level</b></td><td>Severity of impact (Low, Medium, High)</td></tr>
-            <tr><td><b>Related Company</b></td><td>Major company associated with the news</td></tr></table>""", unsafe_allow_html=True)
+            <tr><td><b>date</b></td><td>Date when the market news was reported</td></tr>
+            <tr><td><b>headline</b></td><td>News headline describing the event</td></tr>
+            <tr><td><b>source</b></td><td>News source (e.g., Bloomberg, Reuters)</td></tr>
+            <tr><td><b>market_event</b></td><td>Type of event (Interest Rate Change, Earnings, Policy Update, etc.)</td></tr>
+            <tr><td><b>market_index</b></td><td>Affected market index (e.g., NIFTY, SENSEX, NASDAQ)</td></tr>
+            <tr><td><b>index_change_percent</b></td><td>Percentage change in the index due to the event</td></tr>
+            <tr><td><b>trading_volume</b></td><td>Trading volume recorded after the news</td></tr>
+            <tr><td><b>sentiment</b></td><td>Market sentiment derived from the news (Positive, Negative, Neutral)</td></tr>
+            <tr><td><b>sector</b></td><td>Industry sector impacted (IT, Banking, Retail, etc.)</td></tr>
+            <tr><td><b>impact_level</b></td><td>Severity of impact (Low, Medium, High)</td></tr>
+            <tr><td><b>related_company</b></td><td>Major company associated with the news</td></tr></table>""", unsafe_allow_html=True)
 
 
 st.header("Key Objectives")
